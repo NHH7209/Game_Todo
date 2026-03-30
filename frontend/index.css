@@ -1,0 +1,1986 @@
+:root {
+  --bg: #020617;
+  --bg-soft: #050816;
+  --panel: #020617;
+  --panel-soft: #0b1120;
+  --panel-soft-2: #020617;
+  --border: #1f2937;
+  --text: #e5e7eb;
+  --text-soft: #9ca3af;
+  --accent: #2563eb;
+  --accent-soft: #1d4ed8;
+  --accent-grad-from: #3b82f6;
+  --accent-grad-to: #6366f1;
+  --success: #22c55e;
+  --danger: #f97373;
+  --gold: #fbbf24;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.55);
+  --shadow-card: 0 18px 35px rgba(0, 0, 0, 0.55);
+}
+
+/* 리셋 ------------------------------------------------------ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, "Pretendard",
+    "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 공통 레이아웃 ------------------------------------------------------ */
+
+.page-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 20px 40px;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+/* 링크/텍스트 */
+
+.text-link,
+.text-link-sm {
+  border: none;
+  background: none;
+  color: var(--text-soft);
+  cursor: pointer;
+  padding: 0;
+}
+
+.text-link {
+  font-size: 13px;
+}
+
+.text-link-sm {
+  font-size: 12px;
+}
+
+.text-link:hover,
+.text-link-sm:hover {
+  color: #e5e7eb;
+}
+
+/* 로고 / 공통 */
+
+.logo-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: radial-gradient(circle at top, #22c55e, #15803d);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+/* 버튼 ------------------------------------------------------ */
+
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--accent-grad-from),
+    var(--accent-grad-to)
+  );
+  color: white;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 12px 25px rgba(37, 99, 235, 0.4);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+}
+
+.btn-ghost {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  color: var(--text-soft);
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 13px;
+}
+
+.btn-ghost:hover {
+  border-color: rgba(148, 163, 184, 0.9);
+  color: var(--text);
+}
+
+.btn-outline {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: var(--text);
+  background: transparent;
+  font-size: 14px;
+}
+
+.btn-outline:hover {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.btn-success {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(34, 197, 94, 0.15);
+  color: #bbf7d0;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+}
+
+.btn-success:hover {
+  background: rgba(34, 197, 94, 0.3);
+}
+
+.btn-success.btn-completed {
+  background: rgba(31, 41, 55, 0.9);
+  border-color: rgba(75, 85, 99, 0.9);
+  color: var(--text-soft);
+}
+
+.btn-primary.full,
+.btn-outline.full {
+  width: 100%;
+}
+
+/* 공통 작은 버튼 */
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-xs {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+/* ==========================================================
+   메인(소개) 화면
+   ========================================================== */
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.landing-logo {
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.landing-logo-pill {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: radial-gradient(
+    circle at top,
+    rgba(148, 163, 184, 0.5),
+    transparent
+  );
+}
+
+.landing-main {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.landing-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.landing-badge {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+
+.landing-hero-left h1 {
+  font-size: 36px;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+
+.accent-text {
+  background: linear-gradient(
+    135deg,
+    var(--accent-grad-from),
+    var(--accent-grad-to)
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.landing-desc {
+  font-size: 14px;
+  color: var(--text-soft);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.landing-list {
+  list-style: none;
+  font-size: 14px;
+  color: #e5e7eb;
+  margin-bottom: 20px;
+}
+
+.landing-list li + li {
+  margin-top: 4px;
+}
+
+.landing-cta {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.landing-caption {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.landing-hero-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-preview-card {
+  width: 100%;
+  max-width: 320px;
+  padding: 18px 18px 16px;
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at top left, #111827, #020617);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-preview-label {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 12px;
+}
+
+.hero-preview-quest {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 13px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  margin-bottom: 8px;
+}
+
+.hero-preview-title {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.hero-preview-reward {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.hero-preview-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(34, 197, 94, 0.18);
+  color: #bbf7d0;
+}
+
+.hero-preview-badge.ghost {
+  background: rgba(148, 163, 184, 0.18);
+  color: #e5e7eb;
+}
+
+.hero-preview-footer {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+/* 사용법 섹션 */
+
+.landing-howto h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.howto-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.howto-card {
+  padding: 16px 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: linear-gradient(145deg, #020617, #020617, #030712);
+}
+
+.howto-card h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.howto-card p {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+/* ==========================================================
+   로그인 / 회원가입
+   ========================================================== */
+
+.auth-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.auth-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px 24px 24px;
+  border-radius: var(--radius-xl);
+  background: radial-gradient(circle at top left, #020617, #020617);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  box-shadow: var(--shadow-soft);
+}
+
+.auth-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  margin-bottom: 20px;
+}
+
+.auth-tab {
+  flex: 1;
+  padding: 7px 0;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.auth-tab.active {
+  background: linear-gradient(
+    135deg,
+    var(--accent-grad-from),
+    var(--accent-grad-to)
+  );
+  color: white;
+  font-weight: 600;
+}
+
+.auth-form h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.auth-sub {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.field span {
+  color: var(--text-soft);
+}
+
+.field input {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 10px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 9px 11px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.field input:focus {
+  outline: 1px solid rgba(59, 130, 246, 0.8);
+}
+
+.field-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 18px 0 14px;
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.auth-divider span {
+  padding: 0 10px;
+}
+
+.auth-switch {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-top: 12px;
+}
+
+/* 다크 테마용 인풋 / 텍스트 색상 (공통) */
+
+.field input,
+.field textarea,
+select {
+  background-color: #050816;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f5f5f5;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.quest-type-group,
+.quest-type-group label {
+  color: #f5f5f5;
+}
+
+/* ==========================================================
+   대시보드 레이아웃
+   ========================================================== */
+
+.dashboard-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* 사이드바 */
+
+.sidebar {
+  width: 220px;
+  background: #020617;
+  border-right: 1px solid rgba(31, 41, 55, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 18px 20px;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-item {
+  width: 100%;
+  text-align: left;
+  padding: 9px 9px;
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+.sidebar-item:hover {
+  background: rgba(15, 23, 42, 0.95);
+  color: var(--text);
+}
+
+.sidebar-item.active {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.14),
+    rgba(79, 70, 229, 0.2)
+  );
+  color: #e5e7eb;
+  border: 1px solid rgba(59, 130, 246, 0.7);
+}
+
+.sidebar-bottom {
+  margin-top: 40px;
+}
+
+.sidebar-logout {
+  width: 100%;
+  text-align: left;
+  padding: 8px 9px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #fca5a5;
+  background: rgba(30, 64, 175, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.sidebar-logout:hover {
+  background: rgba(248, 113, 113, 0.16);
+}
+
+/* 메인 */
+
+.dashboard-main {
+  flex: 1;
+  padding: 24px 26px 32px;
+  background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+}
+
+.dashboard-header {
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between; /* 양쪽 끝 정렬 */
+  align-items: center;
+  width: 100%;
+}
+
+.dashboard-header h1 {
+  font-size: 26px; /* 24px → 26px, 살짝 더 메인 타이틀 느낌 */
+  margin-bottom: 6px; /* 4px → 6px */
+  letter-spacing: -0.02em;
+}
+
+.dashboard-header p {
+  font-size: 14px; /* 13px → 14px */
+  color: var(--text-soft);
+  opacity: 0.95; /* 너무 흐리지 않게 */
+}
+
+.dashboard-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.top-currencies {
+  display: flex;
+  gap: 10px;
+}
+
+.currency-chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
+  gap: 18px;
+}
+
+/* 패널 / 카드 공통 */
+
+.panel {
+  background: radial-gradient(circle at top left, #020617, #020617);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 16px 18px 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.panel-header.tight {
+  margin-bottom: 10px;
+}
+
+.panel-header h2 {
+  font-size: 16px;
+}
+
+.panel-desc {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.6;
+}
+
+/* 오늘의 퀘스트 ------------------------------------------------------ */
+
+.quests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quest-card {
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  background: radial-gradient(circle at top left, #020617, #020617);
+}
+
+.quest-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.quest-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.quest-title-row h3 {
+  font-size: 14px;
+}
+
+.quest-tag {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.16);
+  color: #e5e7eb;
+}
+
+.quest-tag.main {
+  background: rgba(37, 99, 235, 0.3);
+  color: #bfdbfe;
+}
+
+.quest-reward {
+  font-size: 12px;
+  color: var(--text-soft);
+  display: flex;
+  gap: 8px;
+}
+
+/* 오늘의 퀘스트 필터 */
+
+.quest-filter-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.repeat-filter {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 오늘의 퀘스트 + 퀘스트 관리 리스트: 높이 고정 + 커스텀 스크롤바 */
+#view-dashboard .quests-list,
+.quests-manage-panel .quests-list.manage {
+  max-height: 320px; /* 리스트 높이 고정 */
+  overflow-y: auto; /* 내용 넘치면 세로 스크롤 */
+  padding-right: 4px;
+  scrollbar-width: thin; /* Firefox 전용 */
+  scrollbar-color: #4b5563 #020617; /* thumb / track 색상 */
+}
+
+/* WebKit 브라우저(Chrome, Edge, Safari)용 */
+#view-dashboard .quests-list::-webkit-scrollbar,
+.quests-manage-panel .quests-list.manage::-webkit-scrollbar {
+  width: 6px; /* 스크롤 너비 살짝 얇게 */
+}
+
+#view-dashboard .quests-list::-webkit-scrollbar-track,
+.quests-manage-panel .quests-list.manage::-webkit-scrollbar-track {
+  background: #020617; /* 전체 배경이랑 어울리게 어두운 트랙 */
+  border-radius: 999px;
+}
+
+#view-dashboard .quests-list::-webkit-scrollbar-thumb,
+.quests-manage-panel .quests-list.manage::-webkit-scrollbar-thumb {
+  background: #4b5563; /* 어두운 회색 손잡이 */
+  border-radius: 999px;
+}
+
+#view-dashboard .quests-list::-webkit-scrollbar-thumb:hover,
+.quests-manage-panel .quests-list.manage::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af; /* hover 시 약간만 밝게 */
+}
+
+/* ==========================================================
+   퀘스트 관리
+   ========================================================== */
+
+.quests-manage-panel {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.quest-manage-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 12px;
+}
+
+.quest-filter-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.quest-filter-label select {
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.quest-manage-count {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 관리용 카드 레이아웃
+   왼쪽: 제목
+   가운데: 내용
+   오른쪽: 날짜 + 수정/삭제 버튼 (가로로)
+*/
+.quests-list.manage .quest-card.quest-card-manage {
+  display: grid;
+  grid-template-columns: 1.3fr 2.3fr 1.6fr; /* 오른쪽 컬럼 넓이는 그대로 OK */
+  gap: 18px;
+  align-items: center;
+}
+
+.quests-list.manage .quest-card.quest-card-manage:hover {
+  border-color: rgba(96, 165, 250, 0.75);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.85);
+}
+
+/* 공통 컬럼 박스 */
+.qm-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* 제목 (왼쪽) */
+.qm-title {
+  font-size: 0.95rem;
+}
+
+/* 내용 (가운데) */
+.qm-col-middle .quest-desc-small {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 오른쪽: 날짜 + 버튼을 한 줄로 배치 */
+.qm-col.qm-col-right {
+  display: flex;
+  flex-direction: row; /* 🟢 가로 방향 */
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px; /* 날짜와 버튼 사이 간격 */
+}
+
+/* 날짜 블록: "생성일" 텍스트 제거하고 날짜만 */
+.qm-date-label {
+  display: none; /* 🟢 생성일 라벨 숨김 */
+}
+
+.qm-date-block {
+  margin: 0;
+  text-align: right;
+}
+
+.qm-date-value {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* 버튼 줄: 가로 배치 + 왼쪽 정렬 */
+.quest-manage-actions {
+  display: flex;
+  flex-direction: row; /* 🟢 가로 */
+  gap: 8px;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+}
+
+/* 퀘스트 관리 패널 안 고스트 버튼 스타일 */
+.quests-manage-panel .btn-ghost {
+  background: transparent;
+  border-radius: 10px;
+  padding: 6px 10px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  color: #e5e7eb;
+  font-size: 12px;
+}
+
+.quests-manage-panel .btn-ghost:hover {
+  background: rgba(148, 163, 184, 0.1);
+}
+
+/* 리스트 고정 높이 + 스크롤 */
+.quest-manage-main {
+  flex: 1;
+}
+
+.quests-manage-panel .quests-list.manage {
+  flex: 0 0 260px;
+  overflow-y: auto;
+  margin-bottom: 8px;
+}
+
+/* 비어 있을 때 문구 */
+.quest-manage-empty {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+/* 2컬럼 레이아웃 (왼쪽: 관리, 오른쪽: 캘린더) */
+.quest-manage-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.1fr;
+  gap: 16px;
+}
+
+/* ==========================================================
+   캘린더 패널
+   ========================================================== */
+
+.quests-calendar-panel {
+  border-radius: 16px;
+}
+
+.quests-calendar-panel .panel-header .panel-desc.small {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0 12px;
+}
+
+.calendar-month {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.cal-nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  width: 26px;
+  height: 26px;
+  line-height: 1;
+  font-size: 0.85rem;
+  cursor: pointer; /* 🔹 클릭 가능 느낌 */
+}
+
+/* 선택한 날짜 퀘스트 상세 */
+.calendar-day-detail {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(148, 163, 184, 0.25);
+  font-size: 0.85rem;
+}
+
+.calendar-day-title {
+  margin-bottom: 6px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.calendar-day-quests {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendar-day-quests li {
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.calendar-day-quests li .cdq-title {
+  font-size: 0.86rem;
+}
+
+.calendar-day-quests li .cdq-desc {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.calendar-day-quests li.cdq-empty {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 요일 + 날짜 그리드 */
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  font-size: 0.8rem;
+}
+
+.cal-weekday {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 4px;
+}
+
+.cal-day {
+  min-height: 32px;
+  border-radius: 8px;
+  text-align: right;
+  padding: 4px 6px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cal-day.empty {
+  background: transparent;
+}
+
+.cal-day-dot {
+  position: absolute;
+  left: 6px;
+  bottom: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #4ade80;
+}
+
+.cal-day.has-quest {
+  border: 1px solid rgba(74, 222, 128, 0.5);
+}
+
+/* 범례 */
+
+.calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #4ade80;
+}
+
+/* 오늘의 퀘스트 리스트: 높이 고정 + 내부 스크롤 */
+#view-dashboard .quests-list {
+  max-height: 320px; /* 필요하면 280~360 사이로 조절해도 됨 */
+  overflow-y: auto;
+  padding-right: 4px; /* 스크롤바 때문에 내용이 붙지 않게 */
+}
+
+/* ==========================================================
+   사이드 패널 / 캐릭터
+   ========================================================== */
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel-block {
+  padding: 14px 14px 14px;
+  border-radius: 16px;
+  background: radial-gradient(circle at top left, #020617, #020617);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.character-card {
+  margin-top: 8px;
+  padding: 16px 14px 14px;
+  border-radius: 14px;
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(56, 189, 248, 0.2),
+      transparent
+    ),
+    radial-gradient(circle at 100% 0, rgba(129, 140, 248, 0.35), transparent),
+    #020617;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 안쪽 내용 가운데 정렬 */
+  text-align: center;
+  min-height: 160px; /* 🔹 카드 전체 높이를 조금 키워줌 */
+}
+
+.character-avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.character-avatar-frame {
+  width: 72px; /* 🔹 기존 56px 에서 크게 */
+  height: 72px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: radial-gradient(
+      circle at 0 0,
+      rgba(56, 189, 248, 0.35),
+      transparent
+    ),
+    radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.25), transparent),
+    #020617;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+}
+
+.character-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 비율 유지하면서 꽉 채우기 */
+  display: block;
+}
+
+.character-name {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.character-level {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+
+.character-stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-soft);
+  margin-bottom: 3px;
+}
+
+.stat-value {
+  font-size: 14px;
+}
+
+/* 대시보드 뷰 placeholder */
+
+.dashboard-view {
+  /* nothing yet */
+}
+
+/* ==========================================================
+   모달 (퀘스트 생성)
+   ========================================================== */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px 20px 16px;
+  border-radius: var(--radius-xl);
+  background: #020617;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.modal-title {
+  font-size: 18px;
+  margin-bottom: 14px;
+}
+
+.modal textarea {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 10px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 9px 11px;
+  font-size: 13px;
+  color: var(--text);
+  resize: vertical;
+}
+
+.modal textarea:focus {
+  outline: 1px solid rgba(59, 130, 246, 0.8);
+}
+
+.modal-footer {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+/* ==========================================================
+   반응형
+   ========================================================== */
+
+@media (max-width: 900px) {
+  .landing-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .landing-hero-right {
+    justify-content: flex-start;
+  }
+
+  .dashboard-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .sidebar-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar-bottom {
+    margin-top: 0;
+  }
+
+  .dashboard-main {
+    flex: 1;
+    padding: 28px 26px 32px; /* 위쪽만 24 → 28 */
+    background: radial-gradient(
+      circle at top,
+      #020617 0,
+      #020617 40%,
+      #000 100%
+    );
+  }
+
+  .dashboard-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .howto-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .auth-card {
+    padding: 20px 18px;
+  }
+
+  .landing-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+.quest-type-options {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.quest-type-options label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.quest-type-options input[type="radio"] {
+  accent-color: #60a5fa; /* 브라우저 지원 시 파란 포인트, 없어도 동작에는 문제 없음 */
+}
+
+/* 빨간 별표 스타일 */
+.required-mark {
+  color: #f97373;
+  margin-left: 3px;
+  font-weight: 600;
+}
+
+/* 업적 ------------------------------------------------------ */
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #121318;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.achievement-left {
+  flex-shrink: 0;
+}
+
+.achievement-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.achievement-icon-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1c1e25;
+  font-size: 20px;
+}
+
+.achievement-center {
+  flex: 1;
+}
+
+.achievement-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.achievement-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.achievement-desc {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-top: 4px;
+}
+
+.achievement-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.achievement-status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.achievement-status.completed {
+  border-color: var(--success);
+  color: #bbf7d0;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+/* 업적 ------------------------------------------------------ */
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.achievement-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.achievement-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.achievement-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.achievement-desc {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-top: 4px;
+}
+
+.achievement-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 업적 배지 썸네일 */
+.achievement-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #1f2933;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.achievement-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* 배지라서 cover보다 contain이 자연스러움 */
+}
+
+
+.achievement-status {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.achievement-status.completed {
+  border-color: var(--success);
+  color: #bbf7d0;
+  background: rgba(34, 197, 94, 0.12);
+}
+
+/* 통계 카드 제목 라벨 */
+.section-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f5f5f7;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+}
+
+/* 카드 안 텍스트 */
+.stat-card p {
+  margin: 3px 0;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.stat-card strong {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* 퀘스트 통계 안 구분선 */
+.stat-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 10px 0 8px;
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skill-card {
+   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #111827;                          /* 살짝 진한 패널 */
+  border: 1px solid rgba(148, 163, 184, 0.35);  /* 은은한 테두리 */
+}
+
+.skill-main {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.skill-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.skill-tag {
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(126, 178, 255, 0.15);
+  color: #a8c7ff;
+  white-space: nowrap;
+}
+
+.profile-inventory-card .profile-equip-btn {
+  color: #fff; /* 글자 흰색 */
+  border-color: #4b9fff; /* 선택사항: 테두리 살짝 */
+}
+
+.shop-item-main,
+.inventory-item-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.shop-item-left,
+.inventory-item-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.shop-item-thumb,
+.inventory-item-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #1f2933;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-item-image,
+.inventory-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-item-placeholder,
+.inventory-item-placeholder {
+  font-size: 20px;
+  opacity: 0.4;
+}
+
+/* ================== 프로필 탭 ================== */
+
+.profile-panel-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.7fr;
+  gap: 18px;
+}
+
+.profile-title {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+.profile-nickname {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.profile-level-text {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 12px;
+}
+
+.profile-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.profile-stat-chip {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.profile-extra {
+  font-size: 13px;
+  color: var(--text-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 슬롯 카드 */
+
+.profile-equip-section {
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.profile-equip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.profile-equip-card {
+  padding: 12px 12px;
+  border-radius: 14px;
+  background: radial-gradient(circle at top left, #020617, #020617);
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  font-size: 13px;
+}
+
+.profile-equip-card.empty {
+  opacity: 0.85;
+}
+
+.equip-label {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+
+.equip-empty-text {
+  font-size: 13px;
+  color: var(--text-soft);
+}
+
+.equip-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.equip-desc {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 10px;
+}
+
+.equip-unequip-btn {
+  margin-top: 2px;
+}
+
+/* 인벤토리 영역 */
+
+.profile-inventory-section {
+  margin-top: 4px;
+}
+
+.profile-inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.profile-inventory-desc {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.profile-inventory-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+/* 프로필 탭 전용 인벤토리 버튼 색상 (이미 존재하지만 한 번 더 명시) */
+.profile-inventory-card .profile-equip-btn {
+  color: #fff;
+  border: 1px solid #4b9fff;
+  background: rgba(37, 99, 235, 0.2);
+}
+
+/* 프로필 인벤토리 2컬럼 레이아웃 */
+.profile-inventory-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.profile-inventory-col-header {
+  font-size: 12px;
+  color: var(--text-soft);
+  margin-bottom: 4px;
+}
+
+/* 각 컬럼 리스트의 높이 조정 (너무 길어지지 않도록) */
+.profile-inventory-col .profile-inventory-list {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+/* ===================== Toast ===================== */
+
+.toast-container {
+  position: fixed;
+  right: 24px; /* ✅ 오른쪽 하단 */
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 120;
+  pointer-events: none; /* 뒤에 있는 요소 클릭 가능하게 */
+}
+
+.toast {
+  pointer-events: auto;
+  min-width: 260px;
+  max-width: 320px;
+  padding: 9px 13px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.96);
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  color: #e5e7eb;
+  font-size: 13px;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.8);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.22s ease-out, transform 0.22s ease-out;
+}
+
+/* 등장 / 퇴장 상태 */
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast.hide {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+/* 타입별 테두리 색상 */
+.toast-success {
+  border-color: rgba(34, 197, 94, 0.8);
+}
+
+.toast-error {
+  border-color: rgba(248, 113, 113, 0.9);
+}
+
+.toast-info {
+  border-color: rgba(59, 130, 246, 0.85);
+}
+
+.settings-card {
+  margin-bottom: 24px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.settings-info-list {
+  margin: 0;
+  padding: 0;
+}
+
+.settings-info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 14px;
+}
+
+.settings-info-row dt {
+  color: #9ca3af;
+}
+
+.settings-info-row dd {
+  margin: 0;
+  color: #e5e7eb;
+}
+
+.settings-msg {
+  font-size: 12px;
+  margin-left: 8px;
+}
+
+.skill-card-new {
+  outline: 2px solid #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+  transition: box-shadow 0.3s ease, outline 0.3s ease;
+}
+
+.achievement-card-new {
+  outline: 2px solid #facc15;
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.7);
+  transition: box-shadow 0.3s ease, outline 0.3s ease;
+}
+
+.achievement-status.equipped {
+  border-color: var(--primary);
+  background-color: rgba(59, 130, 246, 0.12);
+}
+
+.character-avatar-empty-text {
+  color: #aaa;
+  font-size: 14px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+
+/* ================== 설정 탭 폼 공통 스타일 ================== */
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.form-row label {
+  color: var(--text-soft);
+}
+
+.form-row input {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 10px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  padding: 9px 11px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.form-row input::placeholder {
+  color: #6b7280;
+}
+
+.form-row input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.6);
+}
+
+/* 버튼 / 메시지 줄 간 여백 */
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;   /* "저장하기"가 윗 텍스트랑 너무 붙지 않도록 */
+}
+
+
+/* ================== 공통 서브 버튼 (비밀번호 변경 / 뱃지 장착 / 장착 버튼 등) ================== */
+
+.btn-secondary {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  background: rgba(15, 23, 42, 0.9);
+  color: var(--text);      /* 밝은 글자색으로 */
+  font-size: 13px;
+}
+
+.btn-secondary:hover {
+  background: rgba(30, 64, 175, 0.45);
+  border-color: rgba(129, 140, 248, 0.9);
+}
+
+/* 아주 작은 버튼용 (뱃지 장착 같은 곳) */
+.btn-secondary.btn-xs {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+.profile-inventory-card .profile-equip-btn {
+  color: #fff;
+  border-color: #4b9fff;
+}
+
+/* ================== 인벤토리 카드 텍스트 ================== */
+
+.inventory-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inventory-item-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.inventory-item-desc {
+  font-size: 12px;           /* 설명만 살짝 더 작게 */
+  color: var(--text-soft);   /* 연한 색상 */
+}
+
+/* ================== 상점 : 가격 + 구매 버튼 정렬 ================== */
+
+.shop-item-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;      /* 우측 정렬 */
+  justify-content: center;
+  gap: 6px;
+  min-width: 80px;           /* 금액이 길어져도 위치 고정 */
+}
+
+.shop-item-price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  text-align: right;
+  white-space: nowrap;       /* 줄바꿈 방지 */
+}

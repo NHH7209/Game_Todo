@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Difficulty {
+  EASY      // 쉬움
+  NORMAL    // 보통
+  HARD      // 어려움
+}
+
+enum EquipSlot {
+  CHAR      // 캐릭터
+  PET       // 펫 (펫은 슬롯 자체가 펫)
+  NONE
+}
+
+// --- User 모델 ---
+
+model User {
+  id             Int    @id @default(autoincrement())
+  username       String @unique
+  hashedPassword String?
+  
+  email          String   @unique // 이메일 (아이디 찾기/비번 초기화 필수)
+  provider       String   @default("local") // 'local', 'google', 'kakao'
+  socialId       String?  // 소셜 서비스의 고유 ID
+
+  phone          String?
+  address        String?
+
+  exp            Int    @default(0)
+  gold           Int    @default(0)
+  gem            Int    @default(0)
+
+  quests         Quest[]
+  achievements   UserAchievement[]
+  attendances    Attendance[]
+  inventory      UserInventory[]
+  skills UserSkill[]
+}
+
+
+// --- Quest 모델 ---
+model Quest {
+  id          Int      @id @default(autoincrement())
+  title       String // 퀘스트(할일) 제목
+  description String? // 퀘스트 설명 (선택적)
+  isCompleted Boolean  @default(false) // 완료 여부
+
+  createdAt   DateTime @default(now()) // 생성된 시간
+  updatedAt   DateTime @updatedAt // 수정된 시간
+  completedAt DateTime? 
+  
+  rewardExp   Int      @default(0) // 이 퀘스트를 깨면 줄 경험치
+  rewardGold  Int      @default(0) // 이 퀘스트를 깨면 줄 재화
+  rewardSkill    Skill? @relation(fields: [rewardSkillId], references: [id])
+  rewardSkillId  Int?
+
+  difficulty Difficulty @default(NORMAL)
+
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+}
+
+// --- [추가] Achievement 모델 (업적 마스터 테이블) ---
+model Achievement {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique // 업적 이름 (예: "첫 퀘스트 완료!")
+  description String // 업적 설명
+  badgeImage  String // 보상으로 지급될 배지 이미지 URL
+
+  // [추가] 이 업적을 달성한 사용자 목록
+  users UserAchievement[]
+}
+
+// --- [추가] UserAchievement 모델 (연결 테이블) ---
+model UserAchievement {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  achievementId Int
+  createdAt     DateTime @default(now()) // 달성한 시간
+
+  isEquipped    Boolean  @default(false)
+
+  // [추가] 관계 설정
+  user          User        @relation(fields: [userId], references: [id])
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+
+  // [추가] 한 유저는 같은 업적을 한 번만 달성할 수 있도록 유니크 설정
+  @@unique([userId, achievementId])
+}
+
+model Attendance {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  timestamp DateTime @default(now()) // 출석한 시간 (로그인 시간)
+
+  // [추가] 날짜(date) 필드를 별도로 저장하면 통계 쿼리가 훨씬 쉬워집니다.
+  // 이 필드는 로그인 API에서 "2025-11-11" 형식으로 넣어줄 겁니다.
+  date      String
+
+  // [추가] 관계 설정
+  user      User     @relation(fields: [userId], references: [id])
+
+  // [추가] 한 유저는 하루에 한 번만 출석(로그인) 기록을 남깁니다.
+  @@unique([userId, date])
+}
+
+// --- [추가] ShopItem 모델 (상점 마스터 테이블) ---
+model ShopItem {
+  id          Int      @id @default(autoincrement())
+  name        String   // 아이템 이름 (예: "블루 드래곤 펫")
+  description String   // 아이템 설명
+  price       Int      // 아이템 가격 (재화)
+  image       String   // 아이템 이미지 URL
+  category    String   @db.VarChar(50) 
+
+  equipSlot   EquipSlot @default(NONE)
+
+  // [추가] 이 아이템을 구매한 사용자 목록
+  owners      UserInventory[]
+}
+
+// --- [추가] UserInventory 모델 (연결 테이블) ---
+model UserInventory {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  itemId    Int
+  createdAt DateTime @default(now()) // 구매한 시간
+
+  isEquipped    Boolean  @default(false)
+
+  // [추가] 관계 설정
+  user      User     @relation(fields: [userId], references: [id])
+  item      ShopItem @relation(fields: [itemId], references: [id])
+
+  // [추가] 한 유저는 같은 아이템을 한 번만 구매할 수 있도록 설정
+  @@unique([userId, itemId])
+}
+
+// --- [추가] Skill 모델 (자격증/기술 마스터 데이터) ---
+model Skill {
+  id          Int    @id @default(autoincrement())
+  name        String @unique // 스킬 이름 (예: "정보처리기사", "운전면허 1종")
+  description String // 스킬 설명
+  icon        String // 아이콘 이미지 URL
+
+  quests      Quest[] // 이 스킬을 보상으로 주는 퀘스트들
+  users       UserSkill[] // 이 스킬을 가진 유저들
+}
+
+// --- [추가] UserSkill 모델 (유저-스킬 연결 테이블) ---
+model UserSkill {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  skillId   Int
+  acquiredAt DateTime @default(now()) // 획득 날짜
+
+  user      User  @relation(fields: [userId], references: [id])
+  skill     Skill @relation(fields: [skillId], references: [id])
+
+  @@unique([userId, skillId]) // 중복 획득 방지
+}
